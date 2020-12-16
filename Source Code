@@ -1,0 +1,216 @@
+#include <iostream>
+using namespace std;
+
+//KUMPULAN FUNGSI NON-SENSOR
+void pembuka()
+{
+	cout << "=========================================================" <<endl;
+	cout << "||        Sistem Terpadu Perlintasan Kereta Api        ||" <<endl;
+	cout << "||  Perlintasan Kereta Api Pasar Rumput Jakarta Pusat  ||" <<endl;
+	cout << "=========================================================" <<endl;
+}
+
+void jurusan()
+{
+string jurusan [4] = {"Jakarta-Solo","Jakarta-Semarang","Jakarta-Jogja","Jakarta-Bandung"};
+	int x;
+	
+	cout << "Kereta pada hari ini yang akan lewat" <<endl;
+	for (x=0; x<4; x++)
+	{
+		cout << jurusan[x] <<endl;
+	}
+	cout << "" <<endl;
+}
+
+int umum1(int konfirmasi)
+{
+	if (konfirmasi == 0)
+	{
+		cout << "Kereta masih lewat" <<endl;
+		cout << "" <<endl;
+	}
+	else if (konfirmasi ==1)
+	{
+		cout << "Palang kembali membuka dan Kendaraan dipersilahkan lewat" <<endl;
+	}
+}
+
+
+//KUMPULAN FUNGSI SENSOR
+int sensor1()
+{
+	int sensorkereta;
+	
+	menu1:
+	cout << "Sensor mendeteksi kereta api lewat? (0. Tidak, 1. Ya) : "; cin >> sensorkereta;
+	cout << "" <<endl;
+	
+	if (sensorkereta==0)
+	{
+		goto menu1;
+	}
+	else if (sensorkereta==1);
+	{
+		cout << "Buzzer di perlintasan menyala, perintahkan tutup palang pintu" <<endl;
+		cout << "" <<endl;
+	}
+}
+
+int sensor2(int kamera)
+{
+	if (kamera==0)
+	{
+		cout << "Palang lanjut menutup secara otomatis sesuai dengan yang telah di program" <<endl;
+		cout << "" <<endl;
+	}
+	else if (kamera==1)
+	{
+		cout << "Kecepatan penutupan palang melambat memberi kesempatan kendaraan untuk lewat" <<endl;
+		cout << "Sensor berat aktif" <<endl;
+		cout << "" <<endl;
+	}
+}
+
+int sensor3(int sensorberat, int berat, int waktu)
+{
+	if ((sensorberat==0)&(berat==0)&(waktu==0))
+	{
+		cout << "Palang tetap menutup" <<endl;
+		cout << "" <<endl;
+	}
+	else if ((sensorberat==1)&(berat<100)&(waktu<=25))
+	{
+		cout << "Palang tetap menutup" <<endl;
+		cout << "" <<endl;
+	}
+	else if ((sensorberat==1)&(berat>100)&(berat<5000)&(waktu<=25))
+	{
+		cout << "Palang tetap menutup" <<endl;
+		cout << "" <<endl;
+	}
+	else if ((sensorberat==1)&(berat<100)&(waktu>25))
+	{
+		cout << "Perintahkan kereta untuk rem darurat" <<endl;
+		cout << "Sensor suhu aktif" <<endl;
+		cout << "" <<endl;
+	}
+	else if ((sensorberat==1)&(berat>100)&(berat<5000)&(waktu>25))
+	{
+		cout << "Perintahkan kereta untuk rem darurat" <<endl;
+		cout << "Sensor suhu aktif" <<endl;
+		cout << "" <<endl;
+	}
+}
+
+int sensor4()
+{
+	int sensorsuhu1, sensorsuhu2, sensorsuhu3, sensorsuhu4;
+	
+	menu3:
+	cout << "Apakah sensor suhu mendeteksi panas yang dihasilkan pengereman kereta api? (0. Tidak, 1. Ya) : " <<endl;
+	cout << "Sensor suhu 1 : "; cin >> sensorsuhu1; cout << "" <<endl;
+	cout << "Sensor suhu 2 : "; cin >> sensorsuhu2; cout << "" <<endl;
+	cout << "Sensor suhu 3 : "; cin >> sensorsuhu3; cout << "" <<endl;
+	cout << "Sensor suhu 4 : "; cin >> sensorsuhu4; cout << "" <<endl;
+	if ((sensorsuhu1==0)&(sensorsuhu2==0)&(sensorsuhu3==0)&(sensorsuhu4==0))
+	{
+		cout << "Belum memanggil ambulan dan polisi" <<endl;
+		goto menu3;
+	}
+	else if ((sensorsuhu1==1)&(sensorsuhu2==0)&(sensorsuhu3==0)&(sensorsuhu4==0))
+	{
+		cout << "Belum memanggil ambulan dan polisi" <<endl;
+		goto menu3;
+	}
+	else if ((sensorsuhu1==1)&(sensorsuhu2==1)&(sensorsuhu3==0)&(sensorsuhu4==0))
+	{
+		cout << "Belum memanggil ambulan dan polisi" <<endl;
+		goto menu3;
+	}
+	else if ((sensorsuhu1==1)&(sensorsuhu2==1)&(sensorsuhu3==1)&(sensorsuhu4==0))
+	{
+		cout << "Panggil ambulan dan polisi" <<endl;
+	}
+	else if ((sensorsuhu1==1)&(sensorsuhu2==1)&(sensorsuhu3==1)&(sensorsuhu4==1))
+	{
+		cout << "Panggil ambulan dan polisi" <<endl;
+	}
+}
+
+
+//FUNGSI UTAMA
+int main ()
+{
+	int kamera, sensorberat, berat, waktu, sensorsuhu1, sensorsuhu2, sensorsuhu3, sensorsuhu4, konfirmasi;
+		
+	pembuka();
+	
+	jurusan();
+	
+	sensor1();
+	
+	cout << "Kamera mendeteksi kendaraan yang masih diatas perlintasan kereta api? (0. Tidak, 1. Ya) : "; cin >> kamera;
+	cout << "" <<endl;
+	
+	sensor2(kamera);
+	
+	if (kamera==0)
+	{
+		do
+		{
+		cout << "Apakah Kereta api sudah melewati zona perlintasan? (1. Sudah || 0. Belum) : " ; cin >>konfirmasi;
+		cout << "" <<endl;
+		umum1(konfirmasi);
+		} while (konfirmasi==0);
+		return 0;
+	}
+	
+	cout << "Sensor mendeteksi ada kendaraan yang terperangkap di dalam rel oleh palang? (0. Tidak, 1. Ya) : "; cin >> sensorberat;
+	
+	if (sensorberat==1)
+	{
+	cout << "Berat kendaraan yang terperangkap di dalam rel oleh palang (berat dalam kilogram)? : "; cin >> berat;
+	cout << "Berapa detik kendaraan terperangkap di dalam rel oleh palang? : "; cin >> waktu;
+	cout << "" <<endl;
+	}
+	
+	sensor3(sensorberat, berat, waktu);
+	
+	if ((sensorberat==0)&(berat==0)&(waktu==0))
+	{
+		do
+		{
+		cout << "Apakah Kereta api sudah melewati zona perlintasan? (1. Sudah || 0. Belum) : " ; cin >>konfirmasi;
+		cout << "" <<endl;
+		umum1(konfirmasi);
+		} while (konfirmasi==0);
+		return 0;
+	}
+	else if ((sensorberat==1)&(berat<100)&(waktu<=25))
+	{
+		do
+		{
+		cout << "Apakah Kereta api sudah melewati zona perlintasan? (1. Sudah || 0. Belum) : " ; cin >>konfirmasi;
+		cout << "" <<endl;
+		umum1(konfirmasi);
+		} while (konfirmasi==0);
+		return 0;
+	}
+	else if ((sensorberat==1)&(berat>100)&(berat<5000)&(waktu<=25))
+	{
+		do
+		{
+		cout << "Apakah Kereta api sudah melewati zona perlintasan? (1. Sudah || 0. Belum) : " ; cin >>konfirmasi;
+		cout << "" <<endl;
+		umum1(konfirmasi);
+		} while (konfirmasi==0);
+		return 0;
+	}
+	
+	sensor4();
+	
+	return 0;
+}
+				
+////referensi dari : https://m.liputan6.com/news/read/2385064/beginilah-pengaturan-pintu-perlintasan-kereta
